@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: threepilar-example
+    openshift.io/log-alerting: 'true'
+  name: threepilar-coo-example-app
+  namespace: ns1-coo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: threepilar-example
+  template:
+    metadata:
+      labels:
+        app: threepilar-example
+      annotations:
+        sidecar.opentelemetry.io/inject: "true"
+    spec:
+      containers:
+      - image: quay.io/rhn_support_nigsmith/testapp-threepilars:latest
+        imagePullPolicy: IfNotPresent
+        name: threepilar-example
