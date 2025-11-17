@@ -10,10 +10,16 @@ spec:
   serviceAccount: otel-collector-sidecar
   mode: sidecar
   config: |
+    extensions:
+      bearertokenauth:
+        filename: "/var/run/secrets/kubernetes.io/serviceaccount/token"
+
     receivers:
-      otlp:
+      otlp/grpc:
         protocols:
           grpc:
+      otlp/http:
+        protocols:
           http:
     processors:
       batch:
@@ -46,15 +52,19 @@ spec:
       debug:
         verbosity: detailed
     service:
+      telemetry:
+        logs:
+          level: "DEBUG"
+          development: true
+          encoding: "json"
+      extensions: [bearertokenauth]
       pipelines:
-        traces:
-          receivers: [otlp]
-          processors: [memory_limiter, resourcedetection, batch]
-          exporters: [debug]
-        metrics:
-          receivers: [otlp]
-          processors: [memory_limiter, resourcedetection, batch]
-          exporters: [debug]
+        traces/grpc:
+          receivers: [otlp/grpc]
+          exporters: [otlp]
+        traces/http:
+          receivers: [otlp/http]
+          exporters: [otlphttp]
   managementState: managed
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -112,5 +122,5 @@ roleRef:
   name: tempostack-traces-write
 subjects:
   - kind: ServiceAccount
-    name: dev-collector
+    name: otel-collector-sidecar
     namespace: ns1-uwl
