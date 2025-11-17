@@ -55,6 +55,15 @@ metadata:
   name: instance
   namespace: openshift-logging
 spec:
+  filters:
+  - name: drop-endpoints-deprecation
+    type: drop
+    drop:
+    - test:
+      - field: .message
+        matches: "v1 Endpoints is deprecated.*EndpointSlice"
+      - field: .kubernetes.namespace_name
+        matches: "openshift-(monitoring|user-workload-monitoring)"
   serviceAccount:
     name: collector
   outputs:

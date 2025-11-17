@@ -2,7 +2,7 @@ apiVersion: loki.grafana.com/v1
 kind: AlertingRule
 metadata:
   name: threepilars-logging-alert
-  namespace: ns1-coo
+  namespace: ns1-uwl
   labels: 
     openshift.io/log-alerting: 'true'
 spec:
@@ -15,7 +15,7 @@ spec:
             description: Rally count
             summary: ping pong is being played
           expr: >
-            sum(rate({kubernetes_namespace_name="ns1-coo", kubernetes_pod_name=~"threepilar-coo-example-app.*"} |= "info"[1m])) > 0.01 
+            sum(rate({kubernetes_namespace_name="ns1-uwl", kubernetes_pod_name=~"threepilar-uwl-example-app.*"} |= "info"[1m])) > 0.01 
           for: 1m
           labels:
             severity: warning

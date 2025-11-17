@@ -4,8 +4,8 @@ metadata:
   labels:
     app: threepilar-example
     openshift.io/log-alerting: 'true'
-  name: threepilar-coo-example-app
-  namespace: ns1-coo
+  name: threepilar-uwl-example-app
+  namespace: ns1-uwl
 spec:
   replicas: 1
   selector:

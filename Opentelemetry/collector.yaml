@@ -2,7 +2,7 @@ apiVersion: opentelemetry.io/v1alpha1
 kind: OpenTelemetryCollector
 metadata:
   name: otel
-  namespace: ns1-coo
+  namespace: ns1-uwl
 spec:
   serviceAccount: otel-collector-sidecar
   mode: sidecar

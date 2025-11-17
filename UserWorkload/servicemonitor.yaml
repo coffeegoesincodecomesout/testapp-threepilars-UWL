@@ -4,7 +4,7 @@ metadata:
   labels:
     k8s-app: threepilar-example
   name: threepilar-uwl-example-monitor
-  namespace: ns1-coo
+  namespace: ns1-uwl
 spec:
   endpoints:
   - interval: 30s

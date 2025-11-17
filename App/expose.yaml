@@ -4,7 +4,7 @@ metadata:
   labels:
     app: threepilar-example
   name: threepilar-example-service
-  namespace: ns1-coo
+  namespace: ns1-uwl
 spec:
   ports:
   - port: 8090
@@ -19,7 +19,7 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: threepilar-example-route
-  namespace: ns1-coo
+  namespace: ns1-uwl
 spec:
   path: "/ping"
   to:
