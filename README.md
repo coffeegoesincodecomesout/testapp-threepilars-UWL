@@ -25,5 +25,7 @@ oc apply -Rf .
 
 5. scale the testapp down and back up, inorder to deploy the OTEL sidecar
 
+```
 oc scale --replicas=0 deployment/threepilar-example-deployment
 oc scale --replicas=1 deployment/threepilar-example-deployment      
+```
