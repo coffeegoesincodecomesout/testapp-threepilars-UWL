@@ -10,7 +10,7 @@ spec:
     - interval: 1m
       name: threepilars-logging-alert
       rules:
-        - alert: Testapp-rallycount
+        - alert: TestappLogRallyCount
           annotations:
             description: Rally count
             summary: ping pong is being played

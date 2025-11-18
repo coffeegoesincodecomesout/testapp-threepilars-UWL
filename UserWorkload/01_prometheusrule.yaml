@@ -7,7 +7,7 @@ spec:
   groups:
   - name: threepilar-uwl-example
     rules:
-    - alert: Testapp-connection-count
+    - alert: TestappConnectionCount
       for: 1m
       expr: ping_request_count{job="threepilar-example-service"} > 0
       labels:
