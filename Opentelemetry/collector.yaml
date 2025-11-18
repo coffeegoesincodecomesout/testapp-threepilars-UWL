@@ -84,19 +84,6 @@ rules:
       - 'create'
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: tempostack-traces
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: tempostack-traces-write
-subjects:
-  - kind: ServiceAccount
-    name: dev-collector
-    namespace: ns1-uwl
----
-apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: tempostack-traces-write
@@ -123,4 +110,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: otel-collector-sidecar
+    namespace: ns1-uwl
+  - kind: ServiceAccount
+    name: default
     namespace: ns1-uwl
