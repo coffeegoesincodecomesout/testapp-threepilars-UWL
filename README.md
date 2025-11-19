@@ -20,6 +20,7 @@ Demo App: https://github.com/coffeegoesincodecomesout/testapp-ThreePilars
 ```
 
 4. Deploy the contents of this repo 
+ - setting Access_key and access_key secret variables for loki in 02_loggingstack.yaml
 
 ```
 oc apply -Rf . 
@@ -28,6 +29,6 @@ oc apply -Rf .
 5. scale the testapp down and back up, inorder to deploy the OTEL sidecar
 
 ```
-oc scale --replicas=0 deployment/threepilar-example-deployment
-oc scale --replicas=1 deployment/threepilar-example-deployment      
+oc scale -n ns1-uwl --replicas=0 deployment/threepilar-uwl-example-app
+oc scale -n ns1-uwl --replicas=1 deployment/threepilar-uwl-example-app
 ```
