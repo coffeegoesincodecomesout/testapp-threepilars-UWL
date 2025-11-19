@@ -20,7 +20,7 @@ Demo App: https://github.com/coffeegoesincodecomesout/testapp-ThreePilars
 ```
 
 4. Deploy the contents of this repo 
- - setting Access_key and access_key secret variables for loki in 02_loggingstack.yaml
+ - setting Access_key and access_key_id secret variables for loki in 02_loggingstack.yaml
 
 ```
 oc apply -Rf . 
