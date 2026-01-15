@@ -1,5 +1,5 @@
 # testapp-threepilars-UWL
-I use this to demonstrate collecting metrics, logs and traces in Openshift.
+I use this to demonstrate collecting metrics, logs and traces in Openshift
 A testapp is deployed with always firing alerts for both metrics and logs. 
 
 Demo App: https://github.com/coffeegoesincodecomesout/testapp-ThreePilars
