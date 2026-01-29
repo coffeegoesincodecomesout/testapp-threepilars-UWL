@@ -76,18 +76,17 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: tempostack-traces-write
+  name: tempostack-traces-reader
 rules:
   - apiGroups:
       - 'tempo.grafana.com'
-    # this needs to match tenant name in the CR/tenants.yaml and the tenant has be sent in X-Scope-OrgID
-    # The API gateway sends the tenantname as resource (res) to OPA sidecar
-    resources:
+    resources: 
       - dev
+      - prod
     resourceNames:
       - traces
     verbs:
-      - 'create'
+      - 'get' 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -96,14 +95,12 @@ metadata:
 rules:
   - apiGroups:
       - 'tempo.grafana.com'
-    # this needs to match tenant name in the CR/tenants.yaml and the tenant has be sent in X-Scope-OrgID
-    # The API gateway sends the tenantname as resource (res) to OPA sidecar
-    resources:
+    resources: 
       - dev
     resourceNames:
       - traces
     verbs:
-      - 'create'
+      - 'create' 
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
