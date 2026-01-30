@@ -25,6 +25,8 @@ spec:
     secret:
       name: tempostack-dev-odf
       type: s3
+    tls:
+      enable: true
   storageSize: 1Gi
   resources:
     total:
