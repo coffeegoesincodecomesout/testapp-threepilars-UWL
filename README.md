@@ -14,20 +14,49 @@ Demo App: https://github.com/coffeegoesincodecomesout/testapp-ThreePilars
      
 2. Ensure User workload Monitoring is enabled
 
-3. Run logging commands
+3. Deploy the test app:
+
+```
+oc apply -Rf App/
+```
+
+4. Run Logging commands: 
 
 ```
 ./Logging/01_commands.sh
 ```
 
-4. Deploy the contents of this repo 
- - setting Access_key and access_key_id secret variables for loki in 02_loggingstack.yaml
+5. Deploy the LoggingStack
 
 ```
-oc apply -Rf . 
+oc apply -Rf Logging/
 ```
 
-5. scale the testapp down and back up, inorder to deploy the OTEL sidecar
+6. Create bucket secret
+
+```
+./Logging/03_bucketsecret.sh
+```
+
+7. Deploy OpenTelemetry
+
+```
+oc apply -Rf Opentelemetry/ 
+```
+
+8. Deploy Tempo
+
+```
+oc apply -Rf Tempo/
+```
+
+9. Create bucket secret
+
+```
+./Tempo/02_bucketsecret.sh
+```
+
+10 . scale the testapp down and back up, inorder to deploy the OTEL sidecar
 
 ```
 oc scale -n ns1-uwl --replicas=0 deployment/threepilar-uwl-example-app
