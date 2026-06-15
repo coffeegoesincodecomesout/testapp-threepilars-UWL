@@ -182,4 +182,20 @@ run_script "11_NetObserv/03_bucketsecret.sh"
 oc_create -f 11_NetObserv/04_netstack.yaml
 oc_create -f 11_NetObserv/05_alert.yaml
 
+# ── Phase 12: Deploy Auto-Instrumented App─────────────────────────────────────
+log "--- Phase 12: Deploy auto-instrumented Python App ---" 
+oc_create -f 12_AutoInstrumented/01_namespace.yaml
+oc_create -f 12_AutoInstrumented/02_deploy.yaml
+oc_create -f 12_AutoInstrumented/03_expose.yaml
+oc_create -f 12_AutoInstrumented/04_servicemonitor.yaml
+oc_create -f 12_AutoInstrumented/05_instrumentation.yaml
+
+# annotate the pod to inject instrumentation
+echo "Patching deployment with instrumentation annotation..."
+oc patch deployment test-py -n ns3 -p '{"spec": {"template": {"metadata": {"annotations": {"instrumentation.opentelemetry.io/inject-python": "true"}}}}}'
+
+# Restart deployment
+echo "Restarting deployment..."
+oc -n ns3 rollout restart deployment test-py
+
 log "=== Deployment complete ==="
